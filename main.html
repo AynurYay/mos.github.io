@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOS PROJECT</title>
+
+    <link rel="stylesheet" href="source/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <style>
+        .scroll-table {
+            max-height: 700px;
+            overflow-y: auto;
+        }
+    </style>
+
+</head>
+
+<body class="bg-dark">
+
+    <div class="container-fluid mt-3">
+        <!-- Form Machine Modal -->
+        <div class="modal fade" id="addMachineModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-4" id="exampleModalLabel"><strong>Makine Veri Girişi</strong></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="machineForm" class="justify-content-center mb-4" autocomplete="off">
+                            <div class="mb-2">
+                                <label for="ID">Makine ID</label>
+                                <input id="machineID" type="text" class="form-control"
+                                    placeholder="Makine ID Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="machineName">Makine Adı</label>
+                                <input id="machineName" type="text" class="form-control"
+                                    placeholder="Makine Adı Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="machineDescription">Makine Açıklaması</label>
+                                <input id="machineDesc" type="text" class="form-control"
+                                    placeholder="Makine Açıklaması Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="dropdownSelect">Makine Üst Grup ID</label>
+                                <select id="dropdownSelectMachine" class="form-control">
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <div id="btnDivMachine">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Silme Onay Modal -->
+        <div class="modal fade" id="deleteMachineModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <h4>UYARI</h4>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Data silinecek emin misin ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button id="btnApproveMachine" class="btn btn-danger">Onayla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Form Product Modal -->
+        <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-4" id="exampleModalLabel"><strong>Ürün Veri Girişi</strong></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="productForm" class="justify-content-center mb-4" autocomplete="off">
+                            <div class="mb-2">
+                                <label for="ID">Ürün ID</label>
+                                <input id="productID" type="text" class="form-control" placeholder="Ürün ID Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="productName">Ürün Adı</label>
+                                <input id="productName" type="text" class="form-control"
+                                    placeholder="Ürün Adı Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="productDescription">Ürün Açıklaması</label>
+                                <input id="productDesc" type="text" class="form-control"
+                                    placeholder="Ürün Açıklaması Giriniz...">
+                            </div>
+                            <div class="mb-2">
+                                <label for="dropdownSelect">Ürün Üst Grup ID</label>
+                                <select id="dropdownSelectProduct" class="form-control">
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <div id="btnDivProduct">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Silme Onay Modal -->
+        <div class="modal fade" id="deleteProductModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <h4>UYARI</h4>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Data silinecek emin misin ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button id="btnApproveProduct" class="btn btn-danger">Onayla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Form Machine Detail Modal -->
+        <div class="modal fade" id="addMachineDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-4" id="exampleModalLabel"><strong>Veri Girişi</strong></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="justify-content-center mb-4" autocomplete="off">
+                            <div class="mb-2">
+                                <label>Makine ID</label>
+                                <select id="dropdownMachineID" class="form-control">
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label>Ürün ID</label>
+                                <select id="dropdownProductID" class="form-control">
+                                </select>
+                            </div>
+                            <div class="mb-2">
+                                <label >Ürün Adeti</label>
+                                <input id="dropdownProductAmount" type="text" class="form-control" placeholder="Ürün Adedi Giriniz...">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <div id="btnDivMachineDetail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Silme Onay Modal -->
+        <div class="modal fade" id="deleteMachineDetailModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            <h4>UYARI</h4>
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Data silinecek emin misin ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button id="btnApproveMachineDetail" class="btn btn-danger">Onayla</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Makina tablo -->
+            <div class="col-6">
+                <div class="card text-white bg-transparent border-white">
+                    <div class="card-header border-white">
+                        <h3 style="float:left;"><strong>Makine Liste</strong></h3>
+                        <button id="btnModalMachine" class="btn btn-outline-info add" style="float: right;"><span class="bi bi-plus"></span>Ekle</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="scroll-table">
+                            <table class="table text-center text-white">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Makine ID</th>
+                                        <th>Makine Adı</th>
+                                        <th>Makine Açıklaması</th>
+                                        <th>Grup ID</th>
+                                        <th>Güncelle</th>
+                                        <th>Data Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listMachine">
+                                    <!-- Buraya tablo üyeleri eklenecek. -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <button id="btnListMachine" class="btn btn-outline-light bi bi-arrow-down"> Listele</button>
+                </div>
+            </div>
+            <!-- Ürün tablo -->
+            <div class="col-6">
+                <div class="card text-white bg-transparent border-white">
+                    <div class="card-header border-white">
+                        <h3 style="float:left;"><strong>Ürün Liste</strong></h3>
+                        <button id="btnModalProduct" class="btn btn-outline-info add" style="float: right;"><span class="bi bi-plus"></span>Ekle</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="scroll-table">
+                            <table class="table text-center text-white">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Ürün ID</th>
+                                        <th>Ürün Adı</th>
+                                        <th>Ürün Açıklaması</th>
+                                        <th>Grup ID</th>
+                                        <th>Güncelle</th>
+                                        <th>Data Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listProduct">
+                                    <!-- Buraya tablo üyeleri eklenecek. -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <button id="btnListProduct" class="btn btn-outline-light bi bi-arrow-down"> Listele</button>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <!-- Makine içerikleri tablo -->
+            <div class="col-6">
+                <div class="card text-white bg-transparent border-white">
+                    <div class="card-header border-white">
+                        <h3 style="float:left;"><strong>Makine İçerikleri</strong></h3>
+                        <button id="btnModalMachineDetail" class="btn btn-outline-info add" style="float: right;"><span class="bi bi-plus"></span>Ekle</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="scroll-table">
+                            <table class="table text-center text-white">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Makine ID</th>
+                                        <th>Ürün ID</th>
+                                        <th>Ürün adeti</th>
+                                        <th>Güncelle</th>
+                                        <th>Data Sil</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listMachineDetail">
+                                    <!-- Buraya tablo üyeleri eklenecek. -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <button id="btnListMachineDetail" class="btn btn-outline-light bi bi-arrow-down"> Listele</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="source/axios.min.js"></script>
+    <script src="source/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+
+
+</body>
+
+</html>

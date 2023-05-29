@@ -1,0 +1,28 @@
+{
+  "machines": [
+    {
+      "machineID": "12ME",
+      "machineName": "Makine 2",
+      "machineDescription": "Makine 2 Açıklaması",
+      "machineGroupID": "null",
+      "id": 1
+    }
+  ],
+  "products": [
+    {
+      "productID": "P12",
+      "productName": "Ürün 1 ",
+      "productDescription": "Ürün 1 Açıklaması",
+      "productGroupID": "null",
+      "id": 1
+    }
+  ],
+  "machineDetails": [
+    {
+      "machineID": "12ME",
+      "productID": "P12",
+      "productAmount": "800",
+      "id": 1
+    }
+  ]
+}
