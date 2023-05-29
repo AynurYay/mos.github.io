@@ -1,4 +1,4 @@
 # MOS PROJECT
 ## AYNUR YAY
 
-[MOS PROJE LINK](https://aynuryay.github.io/mos.github.io/main.html)
+[MOS PROJE DEMO LINK](https://aynuryay.github.io/mos.github.io/main.html)
